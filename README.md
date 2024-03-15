@@ -21,11 +21,12 @@ from my_very_python_real_email_client import send_mail_to_friend, send_text_to_f
 from retry_later import retry_later
 
 @retry_later(retry_interval=10, max_retries=5, exception=ConnectionError)
-def send_email(param1, param2):
+def send_email():
     send_mail_to_friend(email="veryrealperson@veryrealemail.haha", body="hi!")
 
 @retry_later(retry_interval=10, max_retries=5, exception=ConnectionError)
-async def send_email_2(param1, param2):
+async def send_a_text():
     await send_text_to_friend(number="+123456789", body="hi! texting you")
 
-my_function(param1, param2)
+send_email()
+asyncio.run(send_a_text())
