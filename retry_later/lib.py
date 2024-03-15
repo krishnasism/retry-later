@@ -40,9 +40,7 @@ def retry_later(
             asyncio.run(wrapper(*args, **kwargs))
 
         def wrapper_threaded(*args, **kwargs):
-            t = Thread(target=callback, args=args, kwargs=kwargs)
-            t.daemon = True
-            t.start()
+            Thread(target=callback, args=args, kwargs=kwargs, daemon=True).start()
 
         return wrapper_threaded
 
