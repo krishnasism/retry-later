@@ -1,6 +1,10 @@
-# Retry Later Decorator
+# retry_later
 
-This decorator allows you to execute a function asynchronously in the background and automatically retry it if an exception occurs, up to a specified maximum number of retries.
+`@retry_later` allows you to execute a function asynchronously in the background and automatically retry it if an exception occurs, up to a specified maximum number of retries.
+
+Why?
+
+For example, you can retry sending an email until it's actually sent.
 
 ## Installation
 
