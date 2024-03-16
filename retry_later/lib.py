@@ -2,10 +2,15 @@ import asyncio
 import inspect
 import logging
 import random
+from collections.abc import Coroutine
 from threading import Thread
 from typing import Any, Callable, Union
 
 from .types import ARGS_T, KWARGS_T, RT
+
+
+async def awaitable_none() -> None:
+    return None
 
 
 def retry_later(
@@ -47,8 +52,7 @@ def retry_later(
                     if retries >= max_retries:
                         raise e
                     delay = retry_interval * (backoff**retries) + random.choice(range(0, max_jitter + 1))
-                    if max_delay > 0:
-                        delay = min(max_delay, delay)
+                    delay = min(max(0, max_delay), delay)
                     logging.error(f"[retry later] Retrying in {delay}s due to {e}")
                     await asyncio.sleep(delay)
 
@@ -61,8 +65,11 @@ def retry_later(
         def wrapper_threaded(
             *args: ARGS_T,
             **kwargs: KWARGS_T,
-        ) -> None:
+        ) -> Union[Coroutine[Any, Any, None], None]:
             Thread(target=callback, args=args, kwargs=kwargs, daemon=True).start()
+            if inspect.iscoroutinefunction(func):
+                return awaitable_none()
+            return None
 
         return wrapper_threaded
 

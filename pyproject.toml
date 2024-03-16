@@ -37,7 +37,7 @@ include = ["retry_later*"]
 exclude = ["docs*", "tests*"]
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-cov", "pytest-xdist", "pylint", "mypy", "typing-extensions", "pre-commit", "ruff"]
+dev = ["pytest", "pytest-cov", "pytest-xdist", "pytest-asyncio", "pylint", "mypy", "typing-extensions", "pre-commit", "ruff"]
 
 [tool.ruff]
 indent-width = 4
@@ -81,3 +81,4 @@ strict = true
 [tool.pytest.ini_options]
 log_cli=true
 log_level="NOTSET"
+asyncio_mode="auto"

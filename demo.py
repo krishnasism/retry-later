@@ -14,7 +14,7 @@ async def my_function():
 
 
 async def main():
-    my_function()
+    await my_function()
     print("Hello")
 
 
