@@ -40,5 +40,8 @@ async def send_a_text():
 send_email()
 asyncio.run(send_a_text())
 
+# Other stuff
+print("Hi - I am here!! I complete before my_function!")
+
 # event loop must be running for retry_later to work
 loop.run_forever()

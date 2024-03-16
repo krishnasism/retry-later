@@ -19,4 +19,7 @@ async def main():
 
 
 asyncio.run(main())
+
+print("Hi - I am here!! I complete before my_function!")
+
 loop.run_forever()
