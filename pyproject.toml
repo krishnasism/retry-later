@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta:__legacy__"
+
+[project]
+name="retry_later"
+version="0.0.1"
+authors = [
+  {name = "Krishnasis Mandal", email = "krishnasis.mandal@prestatech.com"}]
+maintainers = [
+  {name = "Krishnasis Mandal", email = "krishnasis.mandal@prestatech.com"}]
+
+description = "Retry your functions later, asynchronously"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.9",
+]
+keywords = [
+  "utils",
+  "retry",
+  "python",
+]
+
+dependencies = [
+]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages.find]
+include = ["retry_later*"]
+exclude = ["docs*", "tests*"]
+
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "pytest-xdist", "pylint", "mypy", "typing-extensions", "pre-commit", "ruff", "autotyping"]
+
+[tool.ruff]
+indent-width = 4
+line-length = 120
+select = [
+    # pycodestyle
+    "E", "W",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # MaccaBe
+    "C901",
+    # Pep8-naming
+    #"N", # TODO: enable
+]
+fix = true
+fixable = ["ALL"]
+exclude = ["docs"]
+preview = true
+
+[tool.ruff.mccabe]
+max-complexity = 10
+
+[tool.mypy]
+warn_unused_configs = true
+files = "retry_later"
+ignore_missing_imports = true
+check_untyped_defs = true
+explicit_package_bases = true
+warn_unreachable = true
+warn_redundant_casts = true
+strict = true
+
+[tool.pytest.ini_options]
+log_cli=true
+log_level="NOTSET"
