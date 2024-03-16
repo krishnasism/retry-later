@@ -29,7 +29,8 @@ def retry_later(
         backoff (int): Multiplier to add between retry attempts. (Default: 1)
         max_delay (int): Maximum delay. (Default: -1, no limit)
         max_jitter (int): Maximum random jitter. (Default: 0, no jitter)
-        exception (Exception): Exception or tuple of exceptions to retry. (Default: Exception Base class).
+        exceptions (Exception | tuple[Exception]): Exception or tuple of exceptions to retry.
+            (Default: Exception Base class).
     Returns:
         None: No value is returned to the caller.
     """
