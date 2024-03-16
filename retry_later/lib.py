@@ -3,11 +3,9 @@ import inspect
 import logging
 import random
 from threading import Thread
-from typing import Any, Callable, TypeVar, Union
+from typing import Any, Callable, Union
 
-RT = TypeVar("RT")
-ARGS_T = tuple[list[str], ...]
-KWARGS_T = dict[str, list[str]]
+from .types import ARGS_T, KWARGS_T, RT
 
 
 def retry_later(
@@ -27,20 +25,22 @@ def retry_later(
         max_delay (int): Maximum delay. (Default: -1, no limit)
         max_jitter (int): Maximum random jitter. (Default: 0, no jitter)
         exception (Exception): Exception or tuple of exceptions to retry. (Default: Exception Base class).
+    Returns:
+        None: No value is returned to the caller.
     """
 
     def decorator(func: Callable[..., RT]) -> Callable[..., Any]:
         async def wrapper(
             *args: ARGS_T,
             **kwargs: KWARGS_T,
-        ) -> Any:
+        ) -> None:
             retries = 0
             while retries < max_retries:
                 try:
                     if inspect.iscoroutinefunction(func):
-                        return await func(*args, **kwargs)
+                        await func(*args, **kwargs)
                     else:
-                        return func(*args, **kwargs)
+                        func(*args, **kwargs)
                 except exceptions as e:
                     retries += 1
                     if retries >= max_retries:
