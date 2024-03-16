@@ -3,7 +3,11 @@ import inspect
 import logging
 import random
 from threading import Thread
-from typing import Callable, Union
+from typing import Any, Callable, TypeVar, Union
+
+RT = TypeVar("RT")
+ARGS_T = tuple[list[str], ...]
+KWARGS_T = dict[str, list[str]]
 
 
 def retry_later(
@@ -12,8 +16,8 @@ def retry_later(
     backoff: int = 1,
     max_delay: int = -1,
     max_jitter: int = 0,
-    exceptions: Union[Exception, tuple[Exception]] = Exception,
-):
+    exceptions: Union[type[Exception], tuple[type[Exception]]] = Exception,
+) -> Callable[[Callable[..., RT]], Callable[..., RT]]:
     """Retry a function, later, in the background.
 
     Args:
@@ -25,15 +29,18 @@ def retry_later(
         exception (Exception): Exception or tuple of exceptions to retry. (Default: Exception Base class).
     """
 
-    def decorator(func: Callable):
-        async def wrapper(*args, **kwargs):
+    def decorator(func: Callable[..., RT]) -> Callable[..., Any]:
+        async def wrapper(
+            *args: ARGS_T,
+            **kwargs: KWARGS_T,
+        ) -> Any:
             retries = 0
             while retries < max_retries:
                 try:
                     if inspect.iscoroutinefunction(func):
-                        await asyncio.gather(func(*args, **kwargs))
+                        return await func(*args, **kwargs)
                     else:
-                        _ = func(*args, **kwargs)
+                        return func(*args, **kwargs)
                 except exceptions as e:
                     retries += 1
                     if retries >= max_retries:
@@ -44,10 +51,16 @@ def retry_later(
                     logging.error(f"[retry later] Retrying in {delay}s due to {e}")
                     await asyncio.sleep(delay)
 
-        def callback(*args, **kwargs):
+        def callback(
+            *args: ARGS_T,
+            **kwargs: KWARGS_T,
+        ) -> None:
             asyncio.run(wrapper(*args, **kwargs))
 
-        def wrapper_threaded(*args, **kwargs):
+        def wrapper_threaded(
+            *args: ARGS_T,
+            **kwargs: KWARGS_T,
+        ) -> None:
             Thread(target=callback, args=args, kwargs=kwargs, daemon=True).start()
 
         return wrapper_threaded
