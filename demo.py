@@ -3,7 +3,7 @@ import time
 
 from retry_later import retry_later
 
-loop = asyncio.get_event_loop()
+loop = asyncio.new_event_loop()
 
 
 @retry_later(retry_interval=5, max_retries=3, backoff=2)
