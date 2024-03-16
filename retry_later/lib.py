@@ -52,7 +52,7 @@ def retry_later(
                     if retries >= max_retries:
                         raise e
                     delay = retry_interval * (backoff**retries) + random.choice(range(0, max_jitter + 1))
-                    delay = min(max(0, max_delay), delay)
+                    delay = delay if max_delay == -1 else min(max_delay, delay)
                     logging.error(f"[retry later] Retrying in {delay}s due to {e}")
                     await asyncio.sleep(delay)
 
