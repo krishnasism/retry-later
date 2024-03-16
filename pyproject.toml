@@ -37,7 +37,7 @@ include = ["retry_later*"]
 exclude = ["docs*", "tests*"]
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-cov", "pytest-xdist", "pylint", "mypy", "typing-extensions", "pre-commit", "ruff", "autotyping"]
+dev = ["pytest", "pytest-cov", "pytest-xdist", "pylint", "mypy", "typing-extensions", "pre-commit", "ruff"]
 
 [tool.ruff]
 indent-width = 4
