@@ -1,14 +1,16 @@
 # retry_later
 
-`@retry_later` allows you to execute a function asynchronously in the background and automatically retry it if an exception occurs, up to a specified maximum number of retries.
+`@retry_later` allows you to retry the execution of a function asynchronously in the background until it's done.
 
-Why?
+### Why?
 
-For example, you can retry sending an email until it's actually sent.
+For example, you can retry sending an email until it's sent.
 
 ## Installation
 
-For now `git clone` or copy the `retry_later` folder. Will be working on it more.
+```bash
+pip install retry-later
+```
 
 ## Usage
 
