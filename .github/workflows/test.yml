@@ -66,4 +66,4 @@ jobs:
         run: pip install -e '.[dev]'
       - name: Run tests
         run:
-          python -m pytest
+          python -m pytest --cov=retry_later --cov-report term-missing
