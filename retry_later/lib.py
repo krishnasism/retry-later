@@ -41,6 +41,7 @@ def retry_later(
                         await func(*args, **kwargs)
                     else:
                         func(*args, **kwargs)
+                    return
                 except exceptions as e:
                     retries += 1
                     if retries >= max_retries:
