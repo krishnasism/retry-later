@@ -21,6 +21,10 @@ Simply add `@retry_later` to your function. This also works with `async` functio
 
 ```python
 from my_very_python_real_email_client import send_mail_to_friend, send_text_to_friend
+import asyncio
+
+# Create new event loop
+loop = asyncio.new_event_loop()
 
 # Import the decorator
 from retry_later import retry_later
@@ -35,3 +39,6 @@ async def send_a_text():
 
 send_email()
 asyncio.run(send_a_text())
+
+# event loop must be running for retry_later to work
+loop.run_forever()
