@@ -17,16 +17,16 @@ async def write_to_file_async(file_name: str, body: str):
         f.write(body)
 
 
-def test_success_once():
-    write_to_file("test.txt", "hello world")
+def test_success_once(temporary_file):
+    write_to_file(temporary_file, "hello world")
     time.sleep(2)
-    with open("test.txt") as f:
-        assert "hello world" in f.readlines()
+    with open(temporary_file) as f:
+        assert "hello world" in f.read()
 
 
 @pytest.mark.asyncio
-async def test_success_once_async():
-    await write_to_file_async("test1.txt", "hello world")
+async def test_success_once_async(temporary_async_file):
+    await write_to_file_async(temporary_async_file, "hello world")
     time.sleep(2)
-    with open("test1.txt") as f:
-        assert "hello world" in f.readlines()
+    with open(temporary_async_file) as f:
+        assert "hello world" in f.read()
