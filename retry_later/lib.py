@@ -17,6 +17,7 @@ def retry_later(
     retry_interval: int = 5,
     max_retries: int = 3,
     backoff: int = 1,
+    exponential_backoff: bool = False,
     max_delay: int = -1,
     max_jitter: int = 0,
     exceptions: Union[type[Exception], tuple[type[Exception]]] = Exception,
@@ -27,6 +28,7 @@ def retry_later(
         retry_interval (int): Time to wait in seconds between each retry. (Default: 5)
         max_retries (int): Maximum retries before giving up. (Default: 3)
         backoff (int): Multiplier to add between retry attempts. (Default: 1)
+        exponential_backoff (bool): Flag to enable/disable exponential backoff. (Default: False)
         max_delay (int): Maximum delay. (Default: -1, no limit)
         max_jitter (int): Maximum random jitter. (Default: 0, no jitter)
         exceptions (Exception | tuple[Exception]): Exception or tuple of exceptions to retry.
@@ -52,7 +54,8 @@ def retry_later(
                     retries += 1
                     if retries >= max_retries:
                         raise e
-                    delay = retry_interval * (backoff**retries) + random.choice(range(0, max_jitter + 1))
+                    backoff_factor = backoff**retries if exponential_backoff else backoff
+                    delay = retry_interval * backoff_factor + random.choice(range(0, max_jitter + 1))
                     delay = delay if max_delay == -1 else min(max_delay, delay)
                     logging.error(f"[retry later] Retrying in {delay}s due to {e}")
                     await asyncio.sleep(delay)
