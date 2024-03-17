@@ -34,7 +34,7 @@ include-package-data = false
 
 [tool.setuptools.packages.find]
 include = ["retry_later*"]
-exclude = ["docs*", "tests*"]
+exclude = ["docs*", "tests*", "examples*"]
 
 [project.optional-dependencies]
 dev = ["pytest", "pytest-cov", "pytest-xdist", "pytest-asyncio", "pylint", "mypy", "typing-extensions", "pre-commit", "ruff"]
