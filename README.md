@@ -1,6 +1,6 @@
 [![latest](https://github.com/krishnasism/retry-later/actions/workflows/publish.yml/badge.svg)](https://github.com/krishnasism/retry-later/actions/workflows/publish.yml)
 [![tests](https://github.com/krishnasism/retry-later/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/krishnasism/retry-later/actions/workflows/test.yml)
-
+[![Coverage Status](https://coveralls.io/repos/github/krishnasism/retry-later/badge.svg?branch=main)](https://coveralls.io/github/krishnasism/retry-later?branch=main)
 # retry_later
 
 `@retry_later` allows you to retry the execution of a function asynchronously in the background until it's done.
