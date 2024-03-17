@@ -67,3 +67,6 @@ jobs:
       - name: Run tests
         run:
           python -m pytest --cov=retry_later --cov-report term-missing
+      - name: Upload coverage to coveralls
+        if: github.event_name == 'push'
+        uses: coverallsapp/github-action@v2.2.3
