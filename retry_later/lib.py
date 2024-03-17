@@ -43,6 +43,7 @@ def retry_later(
             **kwargs: KWARGS_T,
         ) -> None:
             retries = 0
+            jitter_range = range(0, max(0, max_jitter) + 1)
             while retries < max_retries:
                 try:
                     if inspect.iscoroutinefunction(func):
@@ -55,8 +56,8 @@ def retry_later(
                     if retries >= max_retries:
                         raise e
                     backoff_factor = backoff**retries if exponential_backoff else backoff
-                    delay = retry_interval * backoff_factor + random.choice(range(0, max_jitter + 1))
-                    delay = delay if max_delay == -1 else min(max_delay, delay)
+                    delay = retry_interval * backoff_factor + random.choice(jitter_range)
+                    delay = delay if max_delay < 0 else min(max_delay, delay)
                     logging.error(f"[retry later] Retrying in {delay}s due to {e}")
                     await asyncio.sleep(delay)
 
