@@ -17,7 +17,11 @@ pip install retry-later
 
 ## Usage
 
-Simply add `@retry_later` to your function. This also works with `async` functions.
+Simply add `@retry_later()` to your function. This also works with `async` functions.
+
+Look inside the `examples` folder for more examples!
+
+Here's a simple demonstration:
 
 ```python
 from my_very_python_real_email_client import send_mail_to_friend, send_text_to_friend
