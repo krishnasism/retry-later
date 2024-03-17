@@ -33,4 +33,4 @@ print(1 + 1)
 
 # Simulate a long running application, can also use loop.run_forver() to test
 asyncio.run(asyncio.sleep(100))
-exit(1)
+exit(0)
