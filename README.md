@@ -23,7 +23,6 @@ cd retry-later
 
 # Create a virtual environment. You can use anything like venv or pipenv
 python -m venv retry-later-venv
-/retry-later-venv/.venv/bin/activate
 retry-later-venv/Scripts/activate
 
 # Install dev dependencies
