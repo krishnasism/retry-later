@@ -10,7 +10,7 @@
 For example, you can retry sending an email until it's sent.
 
 ## Installation
-
+It's available on [PyPI](https://pypi.org/project/retry-later/)
 ```bash
 pip install retry-later
 ```
