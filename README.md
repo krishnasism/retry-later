@@ -15,6 +15,24 @@ It's available on [PyPI](https://pypi.org/project/retry-later/)
 pip install retry-later
 ```
 
+## Local Installation
+```bash
+# Clone repository
+git clone https://github.com/krishnasism/retry-later.git
+cd retry-later
+
+# Create a virtual environment. You can use anything like venv or pipenv
+python -m venv retry-later-venv
+/retry-later-venv/.venv/bin/activate
+retry-later-venv/Scripts/activate
+
+# Install dev dependencies
+pip install -e ".[dev]"
+
+# Install pre-commit hooks
+pre-commit install
+```
+
 ## Usage
 
 Simply add `@retry_later()` to your function. This also works with `async` functions.
