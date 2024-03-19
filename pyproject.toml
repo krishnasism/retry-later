@@ -6,9 +6,9 @@ build-backend = "setuptools.build_meta:__legacy__"
 name="retry_later"
 version="0.0.5"
 authors = [
-  {name = "Krishnasis Mandal", email = "krishnasis.mandal@prestatech.com"}]
+  {name = "Krishnasis Mandal", email = "krishnasis@hotmail.com"}]
 maintainers = [
-  {name = "Krishnasis Mandal", email = "krishnasis.mandal@prestatech.com"}]
+  {name = "Krishnasis Mandal", email = "krishnasis@hotmail.com"}]
 
 description = "Retry your functions later, asynchronously"
 readme = "README.md"
